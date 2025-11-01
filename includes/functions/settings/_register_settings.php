@@ -474,6 +474,12 @@ define( 'FICTIONEER_OPTIONS', array(
       'sanitize_callback' => 'fictioneer_sanitize_checkbox',
       'default' => 0
     ),
+    'fictioneer_disable_dynamic_editor_styles' => array(
+      'name' => 'fictioneer_disable_dynamic_editor_styles',
+      'group' => 'fictioneer-settings-general-group',
+      'sanitize_callback' => 'fictioneer_sanitize_checkbox',
+      'default' => 0
+    ),
     'fictioneer_enable_storygraph_api' => array(
       'name' => 'fictioneer_enable_storygraph_api',
       'group' => 'fictioneer-settings-general-group',
@@ -1191,6 +1197,7 @@ function fictioneer_get_option_label( $option ) {
       'fictioneer_purge_all_caches' => __( 'Purge all caches on content updates', 'fictioneer' ),
       'fictioneer_disable_theme_search' => __( 'Disable advanced search', 'fictioneer' ),
       'fictioneer_disable_contact_forms' => __( 'Disable theme contact forms', 'fictioneer' ),
+      'fictioneer_disable_dynamic_editor_styles' => __( 'Disable dynamic editor styles', 'fictioneer' ),
       'fictioneer_enable_storygraph_api' => __( 'Enable Storygraph API', 'fictioneer' ),
       'fictioneer_restrict_rest_api' => __( 'Restrict default REST API', 'fictioneer' ),
       'fictioneer_enable_chapter_appending' => __( 'Append new chapters to story', 'fictioneer' ),

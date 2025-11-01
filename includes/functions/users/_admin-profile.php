@@ -1266,7 +1266,10 @@ function fictioneer_admin_editor_settings( $profile_user ) {
   </tr>
   <?php // <--- End HTML
 }
-add_action( 'fictioneer_admin_user_sections', 'fictioneer_admin_editor_settings', 6 );
+
+if ( ! get_option( 'fictioneer_disable_dynamic_editor_styles' ) ) {
+  add_action( 'fictioneer_admin_user_sections', 'fictioneer_admin_editor_settings', 6 );
+}
 
 // =============================================================================
 // SHOW OAUTH

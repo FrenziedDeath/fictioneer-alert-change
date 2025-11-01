@@ -201,7 +201,10 @@ function fictioneer_dynamic_editor_css() {
 
   wp_add_inline_style( 'wp-edit-blocks', fictioneer_minify_css( $css ) );
 };
-add_action( 'enqueue_block_editor_assets', 'fictioneer_dynamic_editor_css' );
+
+if ( ! get_option( 'fictioneer_disable_dynamic_editor_styles' ) ) {
+  add_action( 'enqueue_block_editor_assets', 'fictioneer_dynamic_editor_css' );
+}
 
 // =============================================================================
 // ENQUEUE ADMIN SCRIPTS

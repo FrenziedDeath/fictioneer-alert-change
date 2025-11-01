@@ -112,6 +112,16 @@ $images = get_template_directory_uri() . '/img/documentation/';
               </div>
 
               <div class="fictioneer-card__row">
+                <?php
+                  fictioneer_settings_label_checkbox(
+                    'fictioneer_disable_dynamic_editor_styles',
+                    __( 'Disable dynamic editor styles', 'fictioneer' ),
+                    __( 'You may or may not want this.', 'fictioneer' )
+                  );
+                ?>
+              </div>
+
+              <div class="fictioneer-card__row">
                 <p><?php
                   printf(
                     __( 'Compact <a href="%s" target="_blank">date formats</a>. Some page items, such as story cards, use more compact date formats than the general setting of WordPress. Space is an issue here.', 'fictioneer' ),
