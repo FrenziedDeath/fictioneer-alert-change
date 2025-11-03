@@ -276,6 +276,18 @@ if ( $args['count'] < 2 || count( $args['post_ids'] ?? [] ) === 1 ) {
             // Search for viable chapters...
             $search_list = array_reverse( $story['chapter_ids'] );
 
+            // Pre-load posts
+            $chapter_posts = get_posts(
+              array(
+                'fictioneer_query_name' => 'fictioneer_latest_updates_preload_chapters',
+                'post_type' => 'fcn_chapter',
+                'post_status' => ['publish', 'future'],
+                'post__in' => $search_list ?: [0], // Must not be empty!
+                'update_post_term_cache' => false, // Improve performance
+                'no_found_rows' => true // Improve performance
+              )
+            );
+
             foreach ( $search_list as $chapter_id ) {
               $chapter_post = get_post( $chapter_id );
 

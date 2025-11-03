@@ -278,7 +278,7 @@ if ( $splide ) {
                 continue;
               }
 
-              break;
+              break; // Only one needed
             }
 
             // No viable chapter
