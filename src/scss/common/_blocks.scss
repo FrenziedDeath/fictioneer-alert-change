@@ -217,7 +217,7 @@ details {
 
 .link,
 .footnotes a[href*="http"],
-:is(.modal, .dialog-modal) a[href]:where(:not(.button, .wp-element-button, .modal-tooltip, .media-buttons__item)),
+:is(.modal, .dialog-modal) a[href]:where(:not(.button, .wp-element-button, .modal-tooltip, .media-buttons__item, .tag-pill)),
 p a:not(.wp-element-button, .modal-tooltip) {
   @extend %links;
 }
