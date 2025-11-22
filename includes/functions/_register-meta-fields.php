@@ -93,13 +93,13 @@ function fictioneer_rest_get_auth_callback_for_type( $type ) {
   }
 
   $keys_to_delete = [];
-  $allow_list = fictioneer_get_falsy_meta_allow_list();
+  $allowed_meta_keys = fictioneer_get_falsy_meta_allow_list();
 
   foreach ( $request['meta'] as $key => $value ) {
     if (
       empty( $value ) &&
       strpos( $key, 'fictioneer_' ) === 0 &&
-      ! in_array( $key, $allow_list )
+      ! in_array( $key, $allowed_meta_keys )
     ) {
       $keys_to_delete[] = $key;
     }

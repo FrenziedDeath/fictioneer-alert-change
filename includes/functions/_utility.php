@@ -1591,9 +1591,11 @@ if ( ! function_exists( 'fictioneer_bulk_update_post_meta' ) ) {
     }
 
     // Prepare
+    $allowed_meta_keys = fictioneer_get_falsy_meta_allow_list();
+
     foreach ( $fields as $key => $value ) {
       // Mark for deletion...
-      if ( empty( $value ) && ! in_array( $key, fictioneer_get_falsy_meta_allow_list() ) ) {
+      if ( empty( $value ) && ! in_array( $key, $allowed_meta_keys ) ) {
         $delete_keys[] = $key;
 
         if ( isset( $existing_meta[ $key ] ) ) {
