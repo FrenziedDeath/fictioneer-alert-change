@@ -612,9 +612,12 @@ p.has-background {
 
 hr {
   overflow: hidden;
-  border-color: var(--hr-color);
-  border-width: var(--hr-size) 0 0;
-  margin: var(--hr-spacing) 0;
+
+  &:not(.wp-block-separator) {
+    margin: var(--hr-spacing) 0;
+    border: var(--hr-size) solid var(--hr-color);
+    border-width: var(--hr-size) 0 0;
+  }
 }
 
 .wp-block-separator {
