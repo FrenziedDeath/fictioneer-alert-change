@@ -305,7 +305,10 @@ if ( ! defined( 'FICTIONEER_STORY_CARD_CHAPTER_LIMIT' ) ) {
 
 // Integer: OAuth login cookie lifetime
 if ( ! defined( 'FICTIONEER_OAUTH_COOKIE_EXPIRATION' ) ) {
-  define( 'FICTIONEER_OAUTH_COOKIE_EXPIRATION', 3 * DAY_IN_SECONDS );
+  define(
+    'FICTIONEER_OAUTH_COOKIE_EXPIRATION',
+    max( 1, get_option( 'fictioneer_oauth_cookie_expiration_days', 3 ) ?: 3 ) * DAY_IN_SECONDS
+  );
 }
 
 // Integer: Only remember the latest X read alert IDs

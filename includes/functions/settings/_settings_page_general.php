@@ -1336,6 +1336,15 @@ $images = get_template_directory_uri() . '/img/documentation/';
             <h3 class="fictioneer-card__header"><?php _e( 'Security & Privacy', 'fictioneer' ); ?></h3>
             <div class="fictioneer-card__content">
 
+            <div class="fictioneer-card__row fictioneer-card__row--inline-input">
+                <p class="fictioneer-inline-text-input"><?php
+                  printf(
+                    __( '<span>The OAuth 2.0 login cookie expires after</span> %s <span>days.</span>', 'fictioneer' ),
+                    '<input name="fictioneer_oauth_cookie_expiration_days" type="text" id="fictioneer_oauth_cookie_expiration_days" value="' . esc_attr( get_option( 'fictioneer_oauth_cookie_expiration_days', 3 ) ?: 3 ) . '" style="font-family: Consolas, Monaco, monospace; font-size: 87.5%; text-align: center;" size="4" placeholder="3">'
+                  );
+                ?></p>
+              </div>
+
               <div class="fictioneer-card__row">
                 <?php
                   fictioneer_settings_label_checkbox(

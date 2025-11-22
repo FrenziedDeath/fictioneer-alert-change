@@ -890,7 +890,13 @@ define( 'FICTIONEER_OPTIONS', array(
       'name' => 'fictioneer_patreon_global_lock_unlock_amount',
       'group' => 'fictioneer-settings-connections-group',
       'sanitize_callback' => 'fictioneer_sanitize_absint_or_empty_string'
-    )
+    ),
+    'fictioneer_oauth_cookie_expiration_days' => array(
+      'name' => 'fictioneer_oauth_cookie_expiration_days',
+      'group' => 'fictioneer-settings-general-group',
+      'sanitize_callback' => 'fictioneer_sanitize_integer_one_up',
+      'default' => 3
+    ),
   ),
   'floats' => array(
     'fictioneer_word_count_multiplier' => array(
@@ -1304,6 +1310,7 @@ function fictioneer_get_option_label( $option ) {
       'fictioneer_enable_alerts' => __( 'Enable alerts (requires account)', 'fictioneer' ),
       'fictioneer_critical_font_css' => __( 'Critical font CSS', 'fictioneer' ),
       'fictioneer_seo_sitemap_excludes' => __( 'Post IDs excluded from sitemap', 'fictioneer' ),
+      'fictioneer_oauth_cookie_expiration_days' => __( 'OAuth cookie expiration days', 'fictioneer' ),
     );
   }
 
