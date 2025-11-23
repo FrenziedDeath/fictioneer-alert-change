@@ -6,10 +6,10 @@
   dialog, ::backdrop, .modal {
     opacity: 0;
     transition:
-      display .2s allow-discrete,
-      content-visibility .2s allow-discrete,
-      overlay .2s allow-discrete,
-      opacity .2s ease-in-out;
+      display var(--modal-transition-duration, .2s) allow-discrete,
+      content-visibility var(--modal-transition-duration, .2s) allow-discrete,
+      overlay var(--modal-transition-duration, .2s) allow-discrete,
+      opacity var(--modal-transition-duration, .2s) ease-in-out;
   }
 
   dialog {
