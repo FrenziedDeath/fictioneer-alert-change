@@ -998,6 +998,7 @@ function fictioneer_sql_update_comment_count( $post_id, $count ) {
  * @param int|null    $count       Optional. How many posts to query. Default 6.
  * @param int|null    $new_days    Optional. How many days a post is considered new. Default 14.
  * @param int|null    $new_weight  Optional. How much weight new posts have. Default calculated.
+ * @param array|null  $query_args  Optional. Additional query args for internal WP_Query.
  *
  * @return WP_Query Query result.
  */
@@ -1079,7 +1080,7 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
   if ( count( $selected_ids ) >= $count ) {
     update_option( $option_key, $selected_ids, false );
 
-    return new WP_Query(
+    $query_args = array_merge(
       array(
         'post_type' => $post_type,
         'post__in' => array_slice( $selected_ids, 0, $count ),
@@ -1087,8 +1088,11 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
         'posts_per_page' => $count,
         'no_found_rows' => true,
         'cache_results' => false
-      )
+      ),
+      $args['query_args'] ?? []
     );
+
+    return new WP_Query( $query_args );
   }
 
   // If no more IDs are available (reset)
@@ -1150,7 +1154,7 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
   update_option( $option_key, $previous_ids, false );
 
   // Query posts
-  return new WP_Query(
+  $query_args = array_merge(
     array(
       'post_type' => $post_type,
       'post__in' => array_slice( $selected_ids, 0, $count ),
@@ -1158,6 +1162,9 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
       'posts_per_page' => $count,
       'no_found_rows' => true,
       'cache_results' => false
-    )
+    ),
+    $args['query_args'] ?? []
   );
+
+  return new WP_Query( $query_args );
 }
