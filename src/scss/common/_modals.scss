@@ -2,6 +2,40 @@
 @use '_mixins' as *;
 @use '_variables' as *;
 
+@media (prefers-reduced-motion: no-preference) {
+  dialog, ::backdrop, .modal {
+    opacity: 0;
+    transition:
+      display .2s allow-discrete,
+      content-visibility .2s allow-discrete,
+      overlay .2s allow-discrete,
+      opacity .2s ease-in-out;
+  }
+
+  dialog {
+    &[open],
+    &[open]::backdrop {
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  .modal {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+
+    &[hidden] {
+      opacity: 0;
+    }
+  }
+}
+
 .dialog-modal,
 .modal {
   --modal-width: 300px;
