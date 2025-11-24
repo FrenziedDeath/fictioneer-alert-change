@@ -2447,6 +2447,32 @@ add_filter( 'fictioneer_filter_splide_placeholders', 'child_add_custom_splide_ar
 
 ---
 
+### `apply_filters( 'fictioneer_filter_spotlight_args', $args, $post_type )`
+Filters the arguments passed to the `fictioneer_random_spotlight_query()` helper, which may be part of a shortcode (check the `'query_args'` array key). The helper pulls a number of random stories from the total pool which have not yet been chosen since the pool started. This guarantees that each story will be picked once. New stories have more weight and are more likely to be pulled early.
+
+**Note:** The filter is applied before the arguments are sanitized and defaults are set.
+
+**$args:**
+* $count (int|null) – How many posts to query. Default 6. Unsafe.
+* $new_days (int|null) – How many days a story counts as new. Default 14. Unsafe.
+* $new_weight (int|null) – Weight of new stories. Default calculated (total/count). Unsafe.
+* $query_args (array|null) – Additional query arguments for the WP_Query later. Unsafe.
+* $return (string|null) – Either 'query' or 'args'. Default 'query'. Unsafe.
+
+**Parameters:**
+* $post_type (string) – The post type to query. Default `'fcn_story'`.
+
+---
+
+### `apply_filters( 'fictioneer_filter_spotlight_query_args', $query_args, $args )`
+Filters the WP_Query arguments in the `fictioneer_random_spotlight_query()` helper, which may be part of a shortcode (check the `'fictioneer_query_name'` array key). Not to be confused with the previous filter that affects the selection process.
+
+**Parameters:**
+* $query_args (array) – Query arguments with prepared random IDs. Varies.
+* $args (array) – Arguments passed to the `fictioneer_random_spotlight_query()` helper.
+
+---
+
 ### `apply_filters( 'fictioneer_filter_static_content', $content, $post )`
 Filters the HTML returned by `fictioneer_get_static_content()`. Allows you to customize the cached content itself, the result not being cached. The filter is also applied if the static cache is disabled for the post, so this can be used in place for the `the_content` filter. Relies on the global post and currently only used in chapters.
 

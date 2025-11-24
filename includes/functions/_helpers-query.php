@@ -994,18 +994,21 @@ function fictioneer_sql_update_comment_count( $post_id, $count ) {
  *
  * @since 5.33.5
  *
- * @param string|null $post_type   Optional. Post type to spotlight. Default 'fcn_story'.
- * @param int|null    $count       Optional. How many posts to query. Default 6.
- * @param int|null    $new_days    Optional. How many days a post is considered new. Default 14.
- * @param int|null    $new_weight  Optional. How much weight new posts have. Default calculated.
- * @param array|null  $query_args  Optional. Additional query args for internal WP_Query.
- * @param string|null $return      Optional. Either 'query' or 'args'. Default 'query'.
+ * @param string|null $post_type           Optional. Post type to spotlight. Default 'fcn_story'.
+ * @param int|null    $args['count']       Optional. How many posts to query. Default 6.
+ * @param int|null    $args['new_days']    Optional. How many days a post is considered new. Default 14.
+ * @param int|null    $args['new_weight']  Optional. How much weight new posts have. Default calculated.
+ * @param array|null  $args['query_args']  Optional. Additional query args for internal WP_Query.
+ * @param string|null $args['return']      Optional. Either 'query' or 'args'. Default 'query'.
  *
  * @return WP_Query|array Query result or query arguments for later use.
  */
 
 function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = [] ) {
   global $wpdb;
+
+  // Pre-filter
+  $args = apply_filters( 'fictioneer_filter_spotlight_args', $args, $post_type );
 
   // Setup
   $post_type = fictioneer_sanitize_post_type( $post_type );
@@ -1094,6 +1097,8 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
       $args['query_args'] ?? []
     );
 
+    $query_args = apply_filters( 'fictioneer_filter_spotlight_query_args', $query_args, $args );
+
     if ( $return === 'query' ) {
       return new WP_Query( $query_args );
     }
@@ -1171,6 +1176,8 @@ function fictioneer_random_spotlight_query( $post_type = 'fcn_story', $args = []
     ),
     $args['query_args'] ?? []
   );
+
+  $query_args = apply_filters( 'fictioneer_filter_spotlight_query_args', $query_args, $args );
 
   if ( $return === 'query' ) {
     return new WP_Query( $query_args );
