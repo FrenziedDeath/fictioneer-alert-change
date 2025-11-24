@@ -1234,6 +1234,7 @@ Renders a multi-column grid of small cards, showing the latest four stories orde
 * **class:** Additional CSS classes, separated by whitespace.
 * **splide:** Configuration JSON to turn the grid into a slider. See [Slider](#slider).
 * **cache:** Whether the shortcode should be cached. Default `true`.
+* **spotlight:** Whether to pull random stories from the total pool which have not yet been chosen, guaranteeing that each story *will* be pulled eventually. New stories are more likely to be pulled early. Mind caching and other parameters. Default `false`.
 
 ```
 [fictioneer_latest_stories]

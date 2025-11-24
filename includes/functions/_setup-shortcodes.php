@@ -205,7 +205,8 @@ function fictioneer_get_default_shortcode_args( $attr, $def_count = -1 ) {
     'infobox' => filter_var( $attr['infobox'] ?? 1, FILTER_VALIDATE_BOOLEAN ),
     'source' => filter_var( $attr['source'] ?? 1, FILTER_VALIDATE_BOOLEAN ),
     'splide' => sanitize_text_field( $attr['splide'] ?? '' ),
-    'cache' => filter_var( $attr['cache'] ?? 1, FILTER_VALIDATE_BOOLEAN )
+    'cache' => filter_var( $attr['cache'] ?? 1, FILTER_VALIDATE_BOOLEAN ),
+    'spotlight' => filter_var( $attr['spotlight'] ?? 1, FILTER_VALIDATE_BOOLEAN )
   );
 
   //--- Fixes ------------------------------------------------------------------

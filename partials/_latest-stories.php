@@ -43,6 +43,7 @@
  * @internal $args['classes']             String of additional CSS classes. Default empty.
  * @internal $args['footer_comments']     Whether to show the post comment count. Default false.
  * @internal $args['splide']              Configuration JSON for the Splide slider. Default empty.
+ * @internal $args['spotlight']           Whether to use the spotlight query. Default false.
  */
 
 
@@ -132,6 +133,29 @@ if ( $args['ignore_protected'] ) {
 // Only protected?
 if ( $args['only_protected'] ) {
   $query_args['has_password'] = true;
+}
+
+// Spotlight?
+if ( $args['spotlight'] ?? 0 ) {
+  unset( $query_args['meta_key'] ); // Not needed
+  unset( $query_args['meta_value'] ); // Not needed
+  unset( $query_args['meta_query'] ); // Not needed
+
+  $query_args = array_merge(
+    $query_args,
+    fictioneer_random_spotlight_query(
+      'fcn_story',
+      array(
+        'fictioneer_query_name' => 'latest_stories_spotlight',
+        'count' => $args['count'],
+        'order' => $args['order'],
+        'orderby' => $args['orderby'],
+        'update_post_term_cache' => $show_terms,
+        'cache_results' => true,
+        'return' => 'args'
+      )
+    )
+  );
 }
 
 // Apply filters
