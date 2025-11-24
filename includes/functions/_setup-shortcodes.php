@@ -140,6 +140,74 @@ if ( FICTIONEER_RELATIONSHIP_PURGE_ASSIST ) {
 // =============================================================================
 
 /**
+ * Return default attribute pairs to be used in shortcode_atts().
+ *
+ * @since 5.33.0
+ *
+ * @return array The default pairs.
+ */
+
+function fictioneer_get_shortcode_default_attribute_pairs() {
+  $card_image_style = get_theme_mod( 'card_image_style', 'default' );
+
+  return array(
+    'uid' => '',
+    'type' => 'default',
+    'simple' => false,
+    'single' => false,
+    'spoiler' => false,
+    'spotlight' => true,
+    'count' => -1,
+    'offset' => 0,
+    'order' => '',
+    'orderby' => '',
+    'page' => 1,
+    'posts_per_page' => get_option( 'posts_per_page' ),
+    'post_status' => 'publish',
+    'post_ids' => '',
+    'author' => '',
+    'author_ids' => '',
+    'excluded_authors' => '',
+    'excluded_tags' => '',
+    'excluded_cats' => '',
+    'taxonomies' => '',
+    'relation' => 'AND',
+    'ignore_sticky' => false,
+    'ignore_protected' => false,
+    'only_protected' => false,
+    'vertical' => false,
+    'seamless' => $card_image_style === 'seamless',
+    'aspect_ratio' => '',
+    'thumbnail' => $card_image_style !== 'none',
+    'lightbox' => true,
+    'words' => true,
+    'date' => true,
+    'date_format' => '',
+    'nested_date_format' => '',
+    'footer' => true,
+    'footer_author' => true,
+    'footer_chapters' => true,
+    'footer_words' => true,
+    'footer_date' => true,
+    'footer_comments' => true,
+    'footer_status' => true,
+    'footer_rating' => true,
+    'classes' => '',
+    'infobox' => true,
+    'source' => true,
+    'splide' => '',
+    'cache' => true,
+    'terms' => 'inline',
+    'max_terms' => 10,
+    'height' => '',
+    'min_width' => '',
+    'quality' => '',
+    'no_cap' => '',
+    'for' => ''
+  );
+}
+
+/**
  * Return sanitized arguments extracted from shortcode attributes.
  *
  * @since 5.7.3
@@ -458,6 +526,13 @@ function fictioneer_shortcode_showcase( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 8 );
 
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_showcase'
+  );
+
   // Height/Width/Quality
   $args['height'] = sanitize_text_field( $attr['height'] ?? '' );
   $args['min_width'] = sanitize_text_field( $attr['min_width'] ?? '' );
@@ -578,6 +653,13 @@ function fictioneer_shortcode_latest_chapters( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 4 );
 
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_latest_chapters'
+  );
+
   // Specifics
   $args['simple'] = false;
   $args['spoiler'] = filter_var( $attr['spoiler'] ?? 0, FILTER_VALIDATE_BOOLEAN );
@@ -687,6 +769,13 @@ add_shortcode( 'fictioneer_latest_chapters', 'fictioneer_shortcode_latest_chapte
 function fictioneer_shortcode_latest_stories( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 4 );
+
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_latest_stories'
+  );
 
   // Type
   $type = sanitize_text_field( $attr['type'] ?? 'default' );
@@ -801,6 +890,15 @@ add_shortcode( 'fictioneer_latest_stories', 'fictioneer_shortcode_latest_stories
 function fictioneer_shortcode_latest_story_updates( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 4 );
+
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_latest_updates'
+  );
+
+  // Single
   $args['single'] = filter_var( $attr['single'] ?? 0, FILTER_VALIDATE_BOOLEAN );
 
   // Comments
@@ -903,6 +1001,13 @@ function fictioneer_shortcode_latest_recommendations( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 4 );
 
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_latest_recommendations'
+  );
+
   // Type
   $type = sanitize_text_field( $attr['type'] ?? 'default' );
 
@@ -985,6 +1090,13 @@ function fictioneer_shortcode_latest_posts( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr, 1 );
 
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_latest_posts'
+  );
+
   // Transient?
   $transient_enabled = fictioneer_enable_shortcode_transients( 'fictioneer_latest_posts' );
 
@@ -1038,6 +1150,18 @@ function fictioneer_shortcode_bookmarks( $attr ) {
   // Setup
   $seamless_default = get_theme_mod( 'card_image_style', 'default' ) === 'seamless';
   $thumbnail_default = get_theme_mod( 'card_image_style', 'default' ) !== 'none';
+
+  // WordPress sanitizer/filter
+  $attr = shortcode_atts(
+    array(
+      'count' => -1,
+      'show_empty' => false,
+      'seamless' => $seamless_default,
+      'thumbnail' => $thumbnail_default
+    ),
+    $attr,
+    'fictioneer_bookmarks'
+  );
 
   // Buffer
   ob_start();
@@ -1136,6 +1260,23 @@ function fictioneer_shortcode_chapter_list_empty( $attr ) {
 function fictioneer_shortcode_chapter_list( $attr ) {
   // Sanitize attributes
   $attr = is_array( $attr ) ? array_map( 'sanitize_text_field', $attr ) : sanitize_text_field( $attr );
+
+  // WordPress sanitizer/filter
+  $attr = shortcode_atts(
+    array(
+      'story_id' => '',
+      'chapter_ids' => '',
+      'post_status' => 'publish',
+      'count' => -1,
+      'offset' => 0,
+      'group' => '',
+      'heading' => '',
+      'class' => '',
+      'cache' => true
+    ),
+    $attr,
+    'fictioneer_chapter_list'
+  );
 
   // Return empty case if...
   if ( empty( $attr['story_id'] ) && empty( $attr['chapter_ids'] ) ) {
@@ -1414,6 +1555,33 @@ function fictioneer_shortcode_contact_form( $attr ) {
   // Sanitize attributes
   $attr = is_array( $attr ) ? array_map( 'sanitize_text_field', $attr ) : sanitize_text_field( $attr );
 
+  // WordPress sanitizer/filter
+  $attr = shortcode_atts(
+    array(
+      'title' => '',
+      'submit' => '',
+      'privacy_policy' => false,
+      'required' => '',
+      'email' => '',
+      'name' => '',
+      'text_1' => '',
+      'text_2' => '',
+      'text_3' => '',
+      'text_4' => '',
+      'text_5' => '',
+      'text_6' => '',
+      'check_1' => '',
+      'check_2' => '',
+      'check_3' => '',
+      'check_4' => '',
+      'check_5' => '',
+      'check_6' => '',
+      'class' => ''
+    ),
+    $attr,
+    'fictioneer_contact_form'
+  );
+
   // Setup
   $title = $attr['title'] ?? _x( 'Nameless Form', 'Contact form.', 'fictioneer' );
   $submit = $attr['submit'] ?? __( 'Submit', 'fictioneer' );
@@ -1510,6 +1678,12 @@ add_shortcode( 'fictioneer_contact_form', 'fictioneer_shortcode_contact_form' );
  * @param string|null $attr['simple']       Optional. Hide the advanced options.
  * @param string|null $attr['placeholder']  Optional. Placeholder text.
  * @param string|null $attr['type']         Optional. Default post type to query.
+ * @param string|null $attr['expanded']     Optional. Whether the search form is expanded.
+ * @param string|null $attr['tags']         Optional. Comma-separated list of pre-selected tag IDs.
+ * @param string|null $attr['genres']       Optional. Comma-separated list of pre-selected genre IDs.
+ * @param string|null $attr['fandoms']      Optional. Comma-separated list of pre-selected fandom IDs.
+ * @param string|null $attr['characters']   Optional. Comma-separated list of pre-selected character IDs.
+ * @param string|null $attr['warnings']     Optional. Comma-separated list of pre-selected warning IDs.
  *
  * @return string The captured shortcode HTML.
  */
@@ -1518,9 +1692,26 @@ function fictioneer_shortcode_search( $attr ) {
   // Sanitize attributes
   $attr = is_array( $attr ) ? array_map( 'sanitize_text_field', $attr ) : sanitize_text_field( $attr );
 
+  // WordPress sanitizer/filter
+  $attr = shortcode_atts(
+    array(
+      'simple' => false,
+      'expanded' => false,
+      'placeholder' => '',
+      'type' => false,
+      'tags' => '',
+      'genres' => '',
+      'fandoms' => '',
+      'characters' => '',
+      'warnings' => ''
+    ),
+    $attr,
+    'fictioneer_contact_form'
+  );
+
   // Setup
   $args = array( 'cache' => true );
-  $simple = isset( $attr['simple'] ) ? $attr['simple'] == 'true' || $attr['simple'] == '1' : false;
+  $simple = filter_var( $attr['simple'] ?? 0, FILTER_VALIDATE_BOOLEAN );
   $placeholder = $attr['placeholder'] ?? false;
   $type = $attr['type'] ?? false;
   $pre_tags = fictioneer_explode_list( $attr['tags'] ?? '' );
@@ -1604,6 +1795,13 @@ add_shortcode( 'fictioneer_search', 'fictioneer_shortcode_search' );
 function fictioneer_shortcode_blog( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr );
+
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_blog'
+  );
 
   // Query arguments
   $query_args = array(
@@ -1774,6 +1972,13 @@ add_shortcode( 'fictioneer_blog', 'fictioneer_shortcode_blog' );
 function fictioneer_shortcode_article_cards( $attr ) {
   // Defaults
   $args = fictioneer_get_default_shortcode_args( $attr );
+
+  // WordPress sanitizer/filter
+  $args = shortcode_atts(
+    fictioneer_get_shortcode_default_attribute_pairs(),
+    $args,
+    'fictioneer_article_cards'
+  );
 
   // Terms
   $args['terms'] = fictioneer_sanitize_query_var( $attr['terms'] ?? 0, ['inline', 'pills', 'none', 'false'], 'inline' );
