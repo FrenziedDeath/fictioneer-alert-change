@@ -2621,7 +2621,7 @@ function fictioneer_add_card_customizer_settings( $manager ) {
       'description' => __( 'Minimum card width in pixels (still limited by space); affects card scale. Default 308.', 'fictioneer' ),
       'input_attrs' => array(
         'placeholder' => '308',
-        'min' => 308,
+        'min' => 128,
         'style' => 'width: 80px'
       )
     )
