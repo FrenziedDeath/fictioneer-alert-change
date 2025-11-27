@@ -57,7 +57,7 @@
     transform: none;
   }
 
-  .card {
+  body:not(.content-list-style-lines, .content-list-style-free) .card {
     &__link-list-item {
       padding-left: .35em;
     }
