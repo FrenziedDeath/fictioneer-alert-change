@@ -743,7 +743,7 @@ Filters the prepared raw SQL used to query chapters in the `fictioneer_get_story
 ---
 
 ### `apply_filters( 'fictioneer_filter_get_template_part', $data )`
-Filters the arguments passed to get_template_part(). Returning the optional 'path' key-value pair allows you to override from where the partial is loaded (for example a plugin).
+Filters the arguments passed to `get_template_part()` in the `fictioneer_get_template_part()` helper. Returning the optional `'path' => 'path/to/file.php'` pair allows you to override which partial is loaded and from where (like a plugin).
 
 **Note:** You may need to purge the theme caches after a applying or removing filters.
 
