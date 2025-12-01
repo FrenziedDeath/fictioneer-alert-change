@@ -286,7 +286,7 @@ if ( ! function_exists( 'fictioneer_settings_header' ) ) {
  */
 
 function fictioneer_settings_connections() {
-  get_template_part( 'includes/functions/settings/_settings_page_connections' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_connections' );
 }
 
 /**
@@ -296,7 +296,7 @@ function fictioneer_settings_connections() {
  */
 
 function fictioneer_settings_general() {
-  get_template_part( 'includes/functions/settings/_settings_page_general' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_general' );
 }
 
 /**
@@ -306,7 +306,7 @@ function fictioneer_settings_general() {
  */
 
 function fictioneer_settings_roles() {
-  get_template_part( 'includes/functions/settings/_settings_page_roles' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_roles' );
 }
 
 /**
@@ -316,7 +316,7 @@ function fictioneer_settings_roles() {
  */
 
 function fictioneer_settings_plugins() {
-  get_template_part( 'includes/functions/settings/_settings_page_plugins' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_plugins' );
 }
 
 /**
@@ -326,7 +326,7 @@ function fictioneer_settings_plugins() {
  */
 
 function fictioneer_settings_epubs() {
-  get_template_part( 'includes/functions/settings/_settings_page_epubs' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_epubs' );
 }
 
 /**
@@ -336,7 +336,7 @@ function fictioneer_settings_epubs() {
  */
 
 function fictioneer_settings_seo() {
-  get_template_part( 'includes/functions/settings/_settings_page_seo' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_seo' );
 }
 
 /**
@@ -346,7 +346,7 @@ function fictioneer_settings_seo() {
  */
 
 function fictioneer_settings_phrases() {
-  get_template_part( 'includes/functions/settings/_settings_page_phrases' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_phrases' );
 }
 
 /**
@@ -356,7 +356,7 @@ function fictioneer_settings_phrases() {
  */
 
 function fictioneer_settings_fonts() {
-  get_template_part( 'includes/functions/settings/_settings_page_fonts' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_fonts' );
 }
 
 /**
@@ -366,7 +366,7 @@ function fictioneer_settings_fonts() {
  */
 
 function fictioneer_settings_tools() {
-  get_template_part( 'includes/functions/settings/_settings_page_tools' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_tools' );
 }
 
 /**
@@ -376,7 +376,7 @@ function fictioneer_settings_tools() {
  */
 
 function fictioneer_settings_logs() {
-  get_template_part( 'includes/functions/settings/_settings_page_logs' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_logs' );
 }
 
 /**
@@ -386,7 +386,7 @@ function fictioneer_settings_logs() {
  */
 
 function fictioneer_settings_setup() {
-  get_template_part( 'includes/functions/settings/_settings_page_setup' );
+  fictioneer_get_template_part( 'includes/functions/settings/_settings_page_setup' );
 }
 
 // =============================================================================

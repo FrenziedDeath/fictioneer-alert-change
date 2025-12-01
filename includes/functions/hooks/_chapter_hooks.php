@@ -45,9 +45,9 @@ function fictioneer_chapters_list( $args ) {
             $args['chapters']->the_post();
 
             if ( get_post_meta( get_the_ID(), 'fictioneer_chapter_hidden', true ) ) {
-              get_template_part( 'partials/_card-hidden', null, $card_args );
+              fictioneer_get_template_part( 'partials/_card-hidden', null, $card_args );
             } else {
-              get_template_part( 'partials/_card-chapter', null, $card_args );
+              fictioneer_get_template_part( 'partials/_card-chapter', null, $card_args );
             }
           }
 

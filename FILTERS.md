@@ -742,6 +742,30 @@ Filters the prepared raw SQL used to query chapters in the `fictioneer_get_story
 
 ---
 
+### `apply_filters( 'fictioneer_filter_get_template_part', $data )`
+Filters the arguments passed to get_template_part(). Returning the optional 'path' key-value pair allows you to override from where the partial is loaded (for example a plugin).
+
+**Note:** You may need to purge the theme caches after a applying or removing filters.
+
+**$data:**
+* $slug (string) – The slug name for the generic template.
+* $name (string|null) – The name of the specialized template.
+* $args (array) – Additional arguments passed to the template.
+
+**Example:**
+```php
+function custom_plugin_override_bookmarks_template( $data ) {
+  if ( $data['slug'] === 'partials/_template_bookmark' ) {
+    $data['path'] = plugin_dir_path( __FILE__ ) . 'partials/_template_bookmark.php';
+  }
+
+  return $data;
+}
+add_filter( 'fictioneer_filter_get_template_part', 'custom_plugin_override_bookmarks_template' );
+```
+
+---
+
 ### `apply_filters( 'fictioneer_filter_chapters_added_statuses', $statuses, $story_id )`
 Filters the array of chapter statuses that are eligible to update the `fictioneer_chapters_modified` story meta field in several functions. By default, the statuses are `['publish']`. Note that hidden chapters (meta flag) will still be ignored regardless of status since they are not listed.
 

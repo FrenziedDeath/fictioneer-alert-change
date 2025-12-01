@@ -123,9 +123,9 @@ function fictioneer_stories_list( $args ) {
             $args['stories']->the_post();
 
             if ( get_post_meta( get_the_ID(), 'fictioneer_story_hidden', true ) ) {
-              get_template_part( 'partials/_card-hidden', null, $card_args );
+              fictioneer_get_template_part( 'partials/_card-hidden', null, $card_args );
             } else {
-              get_template_part( 'partials/_card-story', null, $card_args );
+              fictioneer_get_template_part( 'partials/_card-story', null, $card_args );
             }
           }
 

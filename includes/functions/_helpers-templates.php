@@ -1,6 +1,37 @@
 <?php
 
 // =============================================================================
+// GET TEMPLATE PARTS
+// =============================================================================
+
+if ( ! function_exists( 'fictioneer_get_template_part' ) ) {
+  /**
+   * Wrapper with filters for get_template_part().
+   *
+   * @since 5.33.0
+   *
+   * @param string $slug  The slug name for the generic template.
+   * @param string $name  The name of the specialized template.
+   * @param string $args  Additional arguments passed to the template.
+   *
+   * @return void|false Void on success, false if the template does not exist.
+   */
+
+  function fictioneer_get_template_part( $slug, $name = null, $args = [] ) {
+    $data = array( 'slug' => $slug, 'name' => $name, 'args' => $args, 'path' => null );
+    $data = apply_filters( 'fictioneer_filter_get_template_part', $data );
+
+    if ( ! empty( $data['path'] ) && file_exists( $data['path'] ) ) {
+      load_template( $data['path'], false, $data['args'] );
+
+      return;
+    }
+
+    return get_template_part( $data['slug'], $data['name'], $data['args'] );
+  }
+}
+
+// =============================================================================
 // GET EXCERPTS
 // =============================================================================
 
@@ -1970,29 +2001,29 @@ if ( ! function_exists( 'fictioneer_echo_card' ) ) {
           get_post_meta( $post_id, 'fictioneer_chapter_hidden', true ) ||
           get_post_meta( $post_id, 'fictioneer_chapter_no_chapter', true )
         ) {
-          get_template_part( 'partials/_card-hidden', null, $args );
+          fictioneer_get_template_part( 'partials/_card-hidden', null, $args );
         } else {
-          get_template_part( 'partials/_card-chapter', null, $args );
+          fictioneer_get_template_part( 'partials/_card-chapter', null, $args );
         }
         break;
       case 'fcn_story':
         if ( get_post_meta( $post_id, 'fictioneer_story_hidden', true ) ) {
-          get_template_part( 'partials/_card-hidden', null, $args );
+          fictioneer_get_template_part( 'partials/_card-hidden', null, $args );
         } else {
-          get_template_part( 'partials/_card-story', null, $args );
+          fictioneer_get_template_part( 'partials/_card-story', null, $args );
         }
         break;
       case 'fcn_recommendation':
-        get_template_part( 'partials/_card-recommendation', null, $args );
+        fictioneer_get_template_part( 'partials/_card-recommendation', null, $args );
         break;
       case 'fcn_collection':
-        get_template_part( 'partials/_card-collection', null, $args );
+        fictioneer_get_template_part( 'partials/_card-collection', null, $args );
         break;
       case 'post':
-        get_template_part( 'partials/_card-post', null, $args );
+        fictioneer_get_template_part( 'partials/_card-post', null, $args );
         break;
       case 'page':
-        get_template_part( 'partials/_card-page', null, $args );
+        fictioneer_get_template_part( 'partials/_card-page', null, $args );
         break;
     }
   }

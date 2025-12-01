@@ -57,7 +57,7 @@ get_header( null, array( 'no_index' => 1 ) );
 
         <section>
           <?php
-            get_template_part(
+            fictioneer_get_template_part(
               'partials/_bookmarks',
               null,
               array(

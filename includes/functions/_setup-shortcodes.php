@@ -585,7 +585,7 @@ function fictioneer_shortcode_showcase( $attr ) {
   // Buffer
   ob_start();
 
-  get_template_part( 'partials/_showcase', null, $args );
+  fictioneer_get_template_part( 'partials/_showcase', null, $args );
 
   $html = fictioneer_minify_html( ob_get_clean() );
 
@@ -692,14 +692,14 @@ function fictioneer_shortcode_latest_chapters( $attr ) {
 
   switch ( $type ) {
     case 'compact':
-      get_template_part( 'partials/_latest-chapters-compact', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-chapters-compact', null, $args );
       break;
     case 'list':
-      get_template_part( 'partials/_latest-chapters-list', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-chapters-list', null, $args );
       break;
     default:
       $args['simple'] = $type == 'simple';
-      get_template_part( 'partials/_latest-chapters', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-chapters', null, $args );
   }
 
   $html = fictioneer_minify_html( ob_get_clean() );
@@ -812,13 +812,13 @@ function fictioneer_shortcode_latest_stories( $attr ) {
 
   switch ( $type ) {
     case 'compact':
-      get_template_part( 'partials/_latest-stories-compact', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-stories-compact', null, $args );
       break;
     case 'list':
-      get_template_part( 'partials/_latest-stories-list', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-stories-list', null, $args );
       break;
     default:
-      get_template_part( 'partials/_latest-stories', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-stories', null, $args );
   }
 
   $html = fictioneer_minify_html( ob_get_clean() );
@@ -936,13 +936,13 @@ function fictioneer_shortcode_latest_story_updates( $attr ) {
 
   switch ( $type ) {
     case 'compact':
-      get_template_part( 'partials/_latest-updates-compact', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-updates-compact', null, $args );
       break;
     case 'list':
-      get_template_part( 'partials/_latest-updates-list', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-updates-list', null, $args );
       break;
     default:
-      get_template_part( 'partials/_latest-updates', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-updates', null, $args );
   }
 
   $html = fictioneer_minify_html( ob_get_clean() );
@@ -1040,10 +1040,10 @@ function fictioneer_shortcode_latest_recommendations( $attr ) {
 
   switch ( $type ) {
     case 'compact':
-      get_template_part( 'partials/_latest-recommendations-compact', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-recommendations-compact', null, $args );
       break;
     default:
-      get_template_part( 'partials/_latest-recommendations', null, $args );
+      fictioneer_get_template_part( 'partials/_latest-recommendations', null, $args );
   }
 
   $html = fictioneer_minify_html( ob_get_clean() );
@@ -1115,7 +1115,7 @@ function fictioneer_shortcode_latest_posts( $attr ) {
   // Buffer
   ob_start();
 
-  get_template_part( 'partials/_latest-posts', null, $args );
+  fictioneer_get_template_part( 'partials/_latest-posts', null, $args );
 
   $html = fictioneer_minify_html( ob_get_clean() );
 
@@ -1168,7 +1168,7 @@ function fictioneer_shortcode_bookmarks( $attr ) {
   // Buffer
   ob_start();
 
-  get_template_part( 'partials/_bookmarks', null, array(
+  fictioneer_get_template_part( 'partials/_bookmarks', null, array(
     'count' => max( -1, (int) ( $attr['count'] ?? -1 ) ),
     'show_empty' => $attr['show_empty'] ?? false,
     'seamless' => filter_var( $attr['seamless'] ?? $seamless_default, FILTER_VALIDATE_BOOLEAN ),
@@ -1892,7 +1892,7 @@ function fictioneer_shortcode_blog( $attr ) {
       <?php
         while ( $blog_query->have_posts() ) {
           $blog_query->the_post();
-          get_template_part( 'partials/_post', null, array( 'nested' => true, 'context' => 'shortcode_fictioneer_blog' ) );
+          fictioneer_get_template_part( 'partials/_post', null, array( 'nested' => true, 'context' => 'shortcode_fictioneer_blog' ) );
         }
 
         wp_reset_postdata();
@@ -2044,7 +2044,7 @@ function fictioneer_shortcode_article_cards( $attr ) {
   // Buffer
   ob_start();
 
-  get_template_part( 'partials/_article-cards', null, $args );
+  fictioneer_get_template_part( 'partials/_article-cards', null, $args );
 
   $html = fictioneer_minify_html( ob_get_clean() );
 

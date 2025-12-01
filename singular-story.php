@@ -59,7 +59,7 @@ get_header(
         <?php
           // Render story header
           if ( $render_story_header ) {
-            get_template_part(
+            fictioneer_get_template_part(
               'partials/_story-header',
               null,
               array(

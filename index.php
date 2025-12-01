@@ -23,7 +23,7 @@ get_header();
 
   <div class="main__wrapper"><?php
     do_action( 'fictioneer_main_wrapper' );
-    get_template_part( 'partials/_loop' );
+    fictioneer_get_template_part( 'partials/_loop' );
   ?></div>
 
   <?php do_action( 'fictioneer_main_end', 'index' ); ?>

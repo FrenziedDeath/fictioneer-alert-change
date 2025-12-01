@@ -80,7 +80,7 @@ $output['tax_cloud'] = '<div class="archive__tax-cloud">' . wp_tag_cloud(
 
       ?></header>
 
-      <?php get_template_part( 'partials/_archive-loop', null, array( 'taxonomy' => 'post_tag' ) ); ?>
+      <?php fictioneer_get_template_part( 'partials/_archive-loop', null, array( 'taxonomy' => 'post_tag' ) ); ?>
 
     </article>
 

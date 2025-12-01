@@ -894,7 +894,7 @@ function fictioneer_create_html_cache_directory( $dir = null ) {
 function fictioneer_get_cached_partial( $slug, $identifier = '', $expiration = null, $name = null, $args = [] ) {
   // Use default function if...
   if ( ! FICTIONEER_ENABLE_PARTIAL_CACHING ) {
-    get_template_part( $slug, $name, $args );
+    fictioneer_get_template_part( $slug, $name, $args );
 
     return;
   }
@@ -906,7 +906,7 @@ function fictioneer_get_cached_partial( $slug, $identifier = '', $expiration = n
 
   // Make sure directory exists and handle failure
   if ( ! fictioneer_create_html_cache_directory( dirname( $path ) ) ) {
-    get_template_part( $slug, $name, $args );
+    fictioneer_get_template_part( $slug, $name, $args );
     return;
   }
 
@@ -922,11 +922,11 @@ function fictioneer_get_cached_partial( $slug, $identifier = '', $expiration = n
 
   // Generate and cache the new file
   ob_start();
-  get_template_part( $slug, $name, $args );
+  fictioneer_get_template_part( $slug, $name, $args );
   $html = ob_get_clean();
 
   if ( file_put_contents( $path, $html ) === false ) {
-    get_template_part( $slug, $name, $args );
+    fictioneer_get_template_part( $slug, $name, $args );
   } else {
     echo $html;
   }

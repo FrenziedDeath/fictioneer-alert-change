@@ -43,7 +43,7 @@ function fictioneer_recommendations_list( $args ) {
 
           while ( $args['recommendations']->have_posts() ) {
             $args['recommendations']->the_post();
-            get_template_part( 'partials/_card-recommendation', null, $card_args );
+            fictioneer_get_template_part( 'partials/_card-recommendation', null, $card_args );
           }
 
           // Actions at end of results

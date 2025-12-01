@@ -154,11 +154,11 @@ function fictioneer_output_modals( $args ) {
 
   // Login
   if ( fictioneer_show_login() ) {
-    get_template_part( 'partials/_modal-login' );
+    fictioneer_get_template_part( 'partials/_modal-login' );
   }
 
   // Social sharing
-  get_template_part( 'partials/_modal-sharing' );
+  fictioneer_get_template_part( 'partials/_modal-sharing' );
 
   // Site settings
   fictioneer_get_cached_partial( 'partials/_modal-site-settings' );
@@ -180,7 +180,7 @@ function fictioneer_output_modals( $args ) {
     FICTIONEER_ENABLE_STORY_CHANGELOG &&
     get_option( 'fictioneer_show_story_changelog' )
   ) {
-    get_template_part( 'partials/_modal-chapter-changelog' );
+    fictioneer_get_template_part( 'partials/_modal-chapter-changelog' );
   }
 
   // Age confirmation modal
@@ -193,7 +193,7 @@ function fictioneer_output_modals( $args ) {
     )
   ) {
     if ( ! current_user_can( 'edit_fcn_stories' ) ) {
-      get_template_part( 'partials/_modal-age', null, $args );
+      fictioneer_get_template_part( 'partials/_modal-age', null, $args );
     }
   }
 
@@ -229,7 +229,7 @@ function fictioneer_navigation_bar( $args ) {
   }
 
   // Render partial
-  get_template_part( 'partials/_navigation', null, $args );
+  fictioneer_get_template_part( 'partials/_navigation', null, $args );
 }
 add_action( 'fictioneer_site', 'fictioneer_navigation_bar', 10 );
 
@@ -312,7 +312,7 @@ function fictioneer_top_header( $args ) {
 
   // Render Elementor or theme template
   if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'header' ) ) {
-    get_template_part( 'partials/_header-top', null, $args );
+    fictioneer_get_template_part( 'partials/_header-top', null, $args );
   }
 }
 add_action( 'fictioneer_site', 'fictioneer_top_header', 9 );
@@ -350,7 +350,7 @@ function fictioneer_inner_header( $args ) {
   if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'header' ) ) {
     switch ( $theme_mod ) {
       default:
-        get_template_part( 'partials/_header-inner', null, $args );
+        fictioneer_get_template_part( 'partials/_header-inner', null, $args );
     }
   }
 }

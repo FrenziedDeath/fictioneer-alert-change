@@ -46,7 +46,7 @@ get_header( null, array( 'type' => 'fcn_recommendation' ) );
 
         <?php
           // Render article header
-          get_template_part( 'partials/_recommendation-header', null, $hook_args );
+          fictioneer_get_template_part( 'partials/_recommendation-header', null, $hook_args );
 
           // Hook after header
           if ( ! $password_required ) {

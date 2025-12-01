@@ -103,7 +103,7 @@ get_header( null, array( 'type' => 'fcn_collection' ) );
 
         <?php
           // Render article header
-          get_template_part( 'partials/_collection-header', null, $hook_args );
+          fictioneer_get_template_part( 'partials/_collection-header', null, $hook_args );
 
           // Hook after header
           do_action( 'fictioneer_collection_after_header', $hook_args );

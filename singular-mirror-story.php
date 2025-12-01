@@ -20,4 +20,4 @@ if ( ! $post_id ) {
 
 $post = get_post( $post_id );
 
-get_template_part( 'single-fcn_story', null, array( 'post_id' => $post_id ) );
+fictioneer_get_template_part( 'single-fcn_story', null, array( 'post_id' => $post_id ) );

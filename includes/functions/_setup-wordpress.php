@@ -381,7 +381,7 @@ if ( get_option( 'fictioneer_exclude_non_stories_from_cloud_counts' ) ) {
  */
 
 function fictioneer_story_rss_template() {
-  get_template_part( 'rss', 'rss-story' );
+  fictioneer_get_template_part( 'rss', 'rss-story' );
 }
 
 /**
@@ -401,7 +401,7 @@ function fictioneer_story_rss() {
  */
 
 function fictioneer_main_rss_template() {
-  get_template_part( 'rss', 'rss-main' );
+  fictioneer_get_template_part( 'rss', 'rss-main' );
 }
 
 if ( get_option( 'fictioneer_enable_theme_rss' ) ) {

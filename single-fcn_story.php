@@ -66,7 +66,7 @@ get_header(
 
       <?php
         // Render article header
-        get_template_part( 'partials/_story-header', null, $hook_args );
+        fictioneer_get_template_part( 'partials/_story-header', null, $hook_args );
 
         // Hook after header
         do_action( 'fictioneer_story_after_header', $hook_args );
@@ -104,7 +104,7 @@ get_header(
         do_action( 'fictioneer_story_after_content', $hook_args );
 
         // Render footer partial
-        get_template_part( 'partials/_story-footer', null, $hook_args );
+        fictioneer_get_template_part( 'partials/_story-footer', null, $hook_args );
       ?>
 
     </article>

@@ -3393,7 +3393,7 @@ if ( ! function_exists( 'fictioneer_redirect_to_404' ) ) {
     $wp_query->set_404();
     status_header( 404 );
     nocache_headers();
-    get_template_part( 404 );
+    fictioneer_get_template_part( 404 );
 
     // Terminate
     exit();

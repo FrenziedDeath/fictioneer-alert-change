@@ -56,7 +56,7 @@ add_action( 'fictioneer_account_content', 'fictioneer_account_moderation_message
  */
 
 function fictioneer_account_profile( $args ) {
-  get_template_part( 'partials/account/_profile', null, $args );
+  fictioneer_get_template_part( 'partials/account/_profile', null, $args );
 }
 add_action( 'fictioneer_account_content', 'fictioneer_account_profile', 10 );
 
@@ -113,7 +113,7 @@ if ( current_user_can( 'fcn_admin_panel_access' ) && get_option( 'fictioneer_sho
  */
 
 function fictioneer_account_oauth( $args ) {
-  get_template_part( 'partials/account/_oauth', null, $args );
+  fictioneer_get_template_part( 'partials/account/_oauth', null, $args );
 }
 add_action( 'fictioneer_account_content', 'fictioneer_account_oauth', 20 );
 
@@ -136,7 +136,7 @@ add_action( 'fictioneer_account_content', 'fictioneer_account_oauth', 20 );
  */
 
 function fictioneer_account_site_skins( $args ) {
-  get_template_part( 'partials/account/_skins', null, $args );
+  fictioneer_get_template_part( 'partials/account/_skins', null, $args );
 }
 
 if ( get_option( 'fictioneer_enable_css_skins' ) ) {
@@ -162,7 +162,7 @@ if ( get_option( 'fictioneer_enable_css_skins' ) ) {
  */
 
 function fictioneer_account_data( $args ) {
-  get_template_part( 'partials/account/_data', null, $args );
+  fictioneer_get_template_part( 'partials/account/_data', null, $args );
 }
 add_action( 'fictioneer_account_content', 'fictioneer_account_data', 30 );
 
@@ -185,7 +185,7 @@ add_action( 'fictioneer_account_content', 'fictioneer_account_data', 30 );
  */
 
 function fictioneer_account_discussions( $args ) {
-  get_template_part( 'partials/account/_discussions', null, $args );
+  fictioneer_get_template_part( 'partials/account/_discussions', null, $args );
 }
 add_action( 'fictioneer_account_content', 'fictioneer_account_discussions', 40 );
 
@@ -208,7 +208,7 @@ add_action( 'fictioneer_account_content', 'fictioneer_account_discussions', 40 )
  */
 
 function fictioneer_account_danger_zone( $args ) {
-  get_template_part( 'partials/account/_danger-zone', null, $args );
+  fictioneer_get_template_part( 'partials/account/_danger-zone', null, $args );
 }
 
 if ( current_user_can( 'fcn_allow_self_delete' ) ) {

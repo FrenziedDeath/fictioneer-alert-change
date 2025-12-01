@@ -43,7 +43,7 @@ function fictioneer_collections_list( $args ) {
 
           while ( $args['collections']->have_posts() ) {
             $args['collections']->the_post();
-            get_template_part( 'partials/_card-collection', null, $card_args );
+            fictioneer_get_template_part( 'partials/_card-collection', null, $card_args );
           }
 
           // Actions at end of results
@@ -162,7 +162,7 @@ function fictioneer_collection_statistics( $args ) {
   }
 
   // Render template
-  get_template_part( 'partials/_collection-statistics', null, $args );
+  fictioneer_get_template_part( 'partials/_collection-statistics', null, $args );
 }
 add_action( 'fictioneer_collection_after_content', 'fictioneer_collection_statistics', 20 );
 

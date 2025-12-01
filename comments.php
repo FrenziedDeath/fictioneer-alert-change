@@ -47,7 +47,7 @@ if (
   get_option( 'fictioneer_enable_user_comment_editing' ) &&
   ! fictioneer_is_commenting_disabled()
 ) {
-  get_template_part( 'partials/_template_comment_edit' );
+  fictioneer_get_template_part( 'partials/_template_comment_edit' );
 }
 
 ?>

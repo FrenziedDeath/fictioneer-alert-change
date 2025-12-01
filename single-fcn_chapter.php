@@ -101,7 +101,7 @@ get_header(
           do_action( 'fictioneer_chapter_before_header', $hook_args );
 
           // Render article header
-          get_template_part( 'partials/_chapter-header', null, $hook_args );
+          fictioneer_get_template_part( 'partials/_chapter-header', null, $hook_args );
 
           // After chapter article header
           do_action( 'fictioneer_chapter_after_header', $hook_args );
