@@ -292,7 +292,7 @@ if ( get_option( 'fictioneer_enable_alerts' ) ) {
 /**
  * Get alerts.
  *
- * Note: Copy of this is on _auth.php
+ * Note: Copy of this is in _auth.php
  *
  * @since 5.31.0
  *
@@ -339,8 +339,10 @@ function fictioneer_get_alerts( $args = [] ) {
   }
 
   if ( ! empty( $args['post_ids'] ) ) {
-    $post_ids = array_filter( array_map( 'intval', $args['post_ids'] ) );
-    $post_ids = array_filter( $post_ids, function( $value ) { return $value > 0; } );
+    $post_ids = array_filter(
+      array_map( 'intval', $args['post_ids'] ),
+      static fn( $v ) => $v > 0
+    );
 
     if ( $post_ids ) {
       $has_filters = true;
@@ -351,8 +353,10 @@ function fictioneer_get_alerts( $args = [] ) {
   }
 
   if ( ! empty( $args['story_ids'] ) ) {
-    $story_ids = array_filter( array_map( 'intval', $args['story_ids'] ) );
-    $story_ids = array_filter( $story_ids, function( $value ) { return $value > 0; } );
+    $story_ids = array_filter(
+      array_map( 'intval', $args['story_ids'] ),
+      static fn( $v ) => $v > 0
+    );
 
     if ( $story_ids ) {
       $has_filters = true;
@@ -513,7 +517,7 @@ function fictioneer_ajax_mark_alert_read() {
   $new_read_alerts = $_POST['ids'] ?? [];
   $new_read_alerts = is_array( $new_read_alerts ) ? $new_read_alerts : fictioneer_explode_list( $new_read_alerts );
   $new_read_alerts = array_map( 'intval', $new_read_alerts );
-  $new_read_alerts = array_filter( $new_read_alerts, fn( $value ) => $value > 0 );
+  $new_read_alerts = array_filter( $new_read_alerts, static fn( $v ) => $v > 0 );
   $new_read_alerts = array_values( array_unique( $new_read_alerts ) );
 
   // Currently read alert IDs
@@ -526,7 +530,7 @@ function fictioneer_ajax_mark_alert_read() {
   // Add newly read alert IDs
   $updated_read_alerts = array_merge( $read_alerts, $new_read_alerts );
   $updated_read_alerts = array_map( 'intval', $updated_read_alerts );
-  $updated_read_alerts = array_filter( $updated_read_alerts, fn( $value ) => $value > 0 );
+  $updated_read_alerts = array_filter( $updated_read_alerts, static fn( $v ) => $v > 0 );
   $updated_read_alerts = array_values( array_unique( $updated_read_alerts ) );
 
   // Only remember last 500
