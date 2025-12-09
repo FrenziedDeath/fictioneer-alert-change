@@ -312,7 +312,9 @@ function fictioneer_get_alerts( $args = [] ) {
     'story_ids' => [],
     'author' => null,
     'roles' => [],
+    'for_user_roles' => null,
     'user_ids' => [],
+    'for_user_id' => null,
     'tags' => [],
     'only_ids' => false
   ];
@@ -451,12 +453,19 @@ function fictioneer_get_alerts( $args = [] ) {
     }
 
     $sql = "($sql_filtered) UNION ALL ($sql_global)";
-
     $params = array_merge( $filtered_params, $global_types, [ gmdate( 'Y-m-d H:i:s' ) ] );
   } else {
     $sql = $sql_global;
-
     $params = array_merge( $global_types, [ gmdate( 'Y-m-d H:i:s' ) ] );
+  }
+
+  if ( ! empty( $args['for_user_id'] ) ) {
+    $user_id = sanitize_key( $args['for_user_id'] );
+
+    if ( (int) $user_id > 0 ) {
+      $sql .= " UNION ALL (SELECT {$fields}, date, date_gmt FROM $table WHERE users LIKE %s AND date_gmt <= %s)";
+      $params = array_merge( $params, [ '%"' . $wpdb->esc_like( $user_id ) . '";%', gmdate( 'Y-m-d H:i:s' ) ] );
+    }
   }
 
   $sql .= ' ORDER BY date_gmt DESC LIMIT 69';
