@@ -440,6 +440,9 @@ function fictioneer_get_alerts( $args = [] ) {
   $filtered_where[] = 'date_gmt <= %s';
   $filtered_params[] = gmdate( 'Y-m-d H:i:s' );
 
+  $global_placeholders = implode( ', ', array_fill( 0, count( $global_types ), '%s' ) );
+  $sql_global = "SELECT {$fields}, date, date_gmt FROM $table WHERE type IN ($global_placeholders) AND date_gmt <= %s";
+
   if ( $has_filters ) {
     $sql_filtered = "SELECT {$fields}, date, date_gmt FROM $table";
 
@@ -447,20 +450,16 @@ function fictioneer_get_alerts( $args = [] ) {
       $sql_filtered .= ' WHERE ' . implode( ' AND ', $filtered_where );
     }
 
-    $global_placeholders = implode( ', ', array_fill( 0, count( $global_types ), '%s' ) );
-    $sql_global = "SELECT {$fields}, date, date_gmt FROM $table WHERE type IN ($global_placeholders) AND date_gmt <= %s";
-
-    $sql = "($sql_filtered) UNION ALL ($sql_global) ORDER BY date_gmt DESC LIMIT 69";
+    $sql = "($sql_filtered) UNION ALL ($sql_global)";
 
     $params = array_merge( $filtered_params, $global_types, [ gmdate( 'Y-m-d H:i:s' ) ] );
   } else {
-    $global_placeholders = implode( ', ', array_fill( 0, count( $global_types ), '%s' ) );
-
-    $sql = "SELECT {$fields}, date, date_gmt FROM $table WHERE type IN ($global_placeholders) AND date_gmt <= %s ORDER BY date_gmt DESC LIMIT 99";
+    $sql = $sql_global;
 
     $params = array_merge( $global_types, [ gmdate( 'Y-m-d H:i:s' ) ] );
   }
 
+  $sql .= ' ORDER BY date_gmt DESC LIMIT 69';
   $results = $wpdb->get_results( $wpdb->prepare( $sql, ...$params ), ARRAY_A );
 
   if ( empty( $results ) ) {
